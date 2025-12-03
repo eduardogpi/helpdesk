@@ -172,26 +172,6 @@ body {
     padding: 10px 4px !important;
   }
 
-  /* Ocultar coluna ID em mobile */
-  .ant-table-thead > tr > th:first-child,
-  .ant-table-tbody > tr > td:first-child {
-    display: none !important;
-  }
-
-  /* Coluna Chamado ocupa mais espaço */
-  .ant-table-thead > tr > th:nth-child(2),
-  .ant-table-tbody > tr > td:nth-child(2) {
-    width: 55% !important;
-    max-width: none !important;
-  }
-
-  /* Coluna Status mais compacta */
-  .ant-table-thead > tr > th:nth-child(3),
-  .ant-table-tbody > tr > td:nth-child(3) {
-    width: 25% !important;
-    white-space: nowrap !important;
-  }
-
   /* Mostrar tag do sistema apenas em mobile */
   .system-tag-mobile {
     display: inline-flex !important;
