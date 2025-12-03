@@ -89,18 +89,16 @@ const TicketList = ({
     {
       title: 'Chamado',
       dataIndex: 'title',
-      ellipsis: true,
+      ellipsis: false,
       render: (title, record) => (
-        <div className="min-w-[150px] space-y-1">
-          <Text strong className="block text-sm leading-tight">{title}</Text>
-          <div className="flex items-center gap-2 flex-wrap">
-            <Tag color="blue" className="m-0 text-xs px-1.5 py-0 hidden sm:inline-flex">{record.system}</Tag>
-            {record.description && (
-              <Text type="secondary" className="text-xs line-clamp-1 hidden md:block">
-                {record.description.length > 50 ? record.description.substring(0, 50) + '...' : record.description}
-              </Text>
-            )}
-          </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', minWidth: '180px' }}>
+          <span style={{ fontWeight: 600, fontSize: '14px', lineHeight: 1.4 }}>{title}</span>
+          <Tag color="blue" style={{ width: 'fit-content', margin: 0, fontSize: '11px' }}>{record.system}</Tag>
+          {record.description && (
+            <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.45)', lineHeight: 1.3 }}>
+              {record.description.length > 60 ? record.description.substring(0, 60) + '...' : record.description}
+            </span>
+          )}
         </div>
       ),
     },
