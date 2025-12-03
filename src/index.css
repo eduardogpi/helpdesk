@@ -1,0 +1,197 @@
+@import "tailwindcss";
+
+@config {
+  content: ["./src/**/*.{js,jsx,ts,tsx}"];
+}
+
+:root {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #0a0a0a;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #444;
+}
+
+/* Ant Design Layout Content padding */
+.ant-layout-content {
+  padding: 24px 32px !important;
+}
+
+@media (min-width: 640px) {
+  .ant-layout-content {
+    padding: 32px 48px !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .ant-layout-content {
+    padding: 40px 64px !important;
+  }
+}
+
+/* Custom card styles */
+.stat-card {
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Gradient backgrounds */
+.gradient-red {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.05) 100%);
+}
+
+.gradient-blue {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
+}
+
+.gradient-purple {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(139, 92, 246, 0.05) 100%);
+}
+
+.gradient-green {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.05) 100%);
+}
+
+.gradient-yellow {
+  background: linear-gradient(135deg, rgba(234, 179, 8, 0.1) 0%, rgba(234, 179, 8, 0.05) 100%);
+}
+
+/* Table row hover effect */
+.ant-table-tbody > tr:hover > td {
+  background: rgba(255, 255, 255, 0.03) !important;
+}
+
+/* Modal improvements */
+.ant-modal-content {
+  border-radius: 16px !important;
+  overflow: hidden;
+}
+
+.ant-modal-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Card improvements */
+.ant-card {
+  border-radius: 12px !important;
+}
+
+/* Button improvements */
+.ant-btn-primary {
+  box-shadow: 0 4px 14px rgba(22, 119, 255, 0.3);
+}
+
+.ant-btn-primary:hover {
+  box-shadow: 0 6px 20px rgba(22, 119, 255, 0.4);
+}
+
+/* Input focus states */
+.ant-input:focus,
+.ant-input-focused,
+.ant-select-focused .ant-select-selector {
+  box-shadow: 0 0 0 3px rgba(22, 119, 255, 0.15) !important;
+}
+
+/* Badge pulse animation */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.pulse-animation {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Responsive utilities */
+@media (max-width: 640px) {
+  .hide-mobile {
+    display: none !important;
+  }
+  
+  .text-mobile-sm {
+    font-size: 0.75rem !important;
+  }
+}
+
+/* Smooth transitions */
+.transition-smooth {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Glass effect */
+.glass-effect {
+  background: rgba(20, 20, 20, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Tag improvements */
+.ant-tag {
+  border-radius: 6px !important;
+  font-weight: 500;
+}
+
+/* Progress bar improvements */
+.ant-progress-bg {
+  border-radius: 4px !important;
+}
+
+/* Timeline improvements */
+.ant-timeline-item-content {
+  padding-bottom: 16px !important;
+}
+
+/* Segmented improvements */
+.ant-segmented {
+  border-radius: 10px !important;
+}
+
+.ant-segmented-item {
+  border-radius: 8px !important;
+}
