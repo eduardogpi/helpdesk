@@ -65,47 +65,48 @@ const DetailsModal = ({
     <Modal
       title={
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-purple-500/10 flex items-center justify-center">
-            <FileText size={16} className="text-purple-400" />
+          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-purple-500/10 flex items-center justify-center">
+            <FileText size={14} className="text-purple-400" />
           </div>
-          <span>Detalhes do Chamado</span>
+          <span className="text-sm sm:text-base">Detalhes do Chamado</span>
         </div>
       }
       open={isOpen}
       onCancel={onClose}
       footer={
-        <div className="flex flex-col-reverse sm:flex-row justify-end gap-2">
-          <Button onClick={onClose} size="large" className="w-full sm:w-auto">
+        <div className="flex justify-end">
+          <Button onClick={onClose} className="w-full sm:w-auto">
             Fechar
           </Button>
         </div>
       }
-      width={720}
+      width="100%"
+      style={{ maxWidth: 720 }}
       centered
       className="responsive-modal"
     >
       {selectedTicket && (
-        <div className="py-2 space-y-4">
+        <div className="py-1 sm:py-2 space-y-3 sm:space-y-4">
           {/* Header com título e status */}
-          <div className="flex flex-col sm:flex-row justify-between items-start gap-3 pb-4 border-b border-gray-800">
+          <div className="flex flex-col sm:flex-row justify-between items-start gap-2 sm:gap-3 pb-3 sm:pb-4 border-b border-gray-800">
             <div className="flex-1">
-              <Title level={4} style={{ margin: 0 }} className="text-lg sm:text-xl">
+              <Title level={5} style={{ margin: 0 }} className="!text-sm sm:!text-lg">
                 {selectedTicket.title}
               </Title>
-              <Space className="mt-2" wrap>
-                <Tag color={getPriorityColor(selectedTicket.priority)} className="font-semibold">
+              <Space className="mt-1.5 sm:mt-2" wrap size={4}>
+                <Tag color={getPriorityColor(selectedTicket.priority)} className="font-semibold !text-xs">
                   {getPriorityLabel(selectedTicket.priority)}
                 </Tag>
                 {selectedTicket.assignedTo && (
-                  <Tag color="purple" className="flex items-center gap-1">
-                    <User size={12} /> {selectedTicket.assignedTo}
+                  <Tag color="purple" className="flex items-center gap-1 !text-xs">
+                    <User size={10} /> {selectedTicket.assignedTo}
                   </Tag>
                 )}
               </Space>
             </div>
             <Badge 
               status={getStatusColor(selectedTicket.status)} 
-              text={<Text strong className="text-sm">{getStatusLabel(selectedTicket.status)}</Text>} 
+              text={<Text strong className="text-xs sm:text-sm">{getStatusLabel(selectedTicket.status)}</Text>} 
             />
           </div>
 
@@ -113,12 +114,12 @@ const DetailsModal = ({
           <Card 
             size="small" 
             className="bg-[#1a1a1a] border-gray-800"
-            styles={{ body: { padding: '12px 16px' } }}
+            styles={{ body: { padding: '10px 12px' } }}
           >
-            <Text type="secondary" className="block mb-2 text-xs uppercase tracking-wider">
+            <Text type="secondary" className="block mb-1 text-[10px] sm:text-xs uppercase tracking-wider">
               Descrição
             </Text>
-            <Paragraph className="mb-0 text-gray-300 text-sm">
+            <Paragraph className="mb-0 text-gray-300 text-xs sm:text-sm !leading-relaxed">
               {selectedTicket.description}
             </Paragraph>
           </Card>
@@ -160,50 +161,50 @@ const DetailsModal = ({
           )}
 
           {/* Informações */}
-          <Row gutter={[12, 12]}>
+          <Row gutter={[8, 8]}>
             <Col xs={12} sm={6}>
-              <div className="p-3 bg-[#1a1a1a] rounded-lg text-center">
-                <Text type="secondary" className="text-xs block mb-1">ID</Text>
-                <Text code className="text-xs">{selectedTicket.id}</Text>
+              <div className="p-2 sm:p-3 bg-[#1a1a1a] rounded-lg text-center">
+                <Text type="secondary" style={{ display: 'block', marginBottom: '4px', fontSize: '10px' }}>ID</Text>
+                <Text code style={{ display: 'block', fontSize: '10px' }}>{selectedTicket.id}</Text>
               </div>
             </Col>
             <Col xs={12} sm={6}>
-              <div className="p-3 bg-[#1a1a1a] rounded-lg text-center">
-                <Text type="secondary" className="text-xs block mb-1">Sistema</Text>
-                <Text className="text-xs">{selectedTicket.system}</Text>
+              <div className="p-2 sm:p-3 bg-[#1a1a1a] rounded-lg text-center">
+                <Text type="secondary" style={{ display: 'block', marginBottom: '4px', fontSize: '10px' }}>Sistema</Text>
+                <Text style={{ display: 'block', fontSize: '10px' }}>{selectedTicket.system}</Text>
               </div>
             </Col>
             <Col xs={12} sm={6}>
-              <div className="p-3 bg-[#1a1a1a] rounded-lg text-center">
-                <Text type="secondary" className="text-xs block mb-1">Solicitante</Text>
-                <Text className="text-xs">{selectedTicket.requester}</Text>
+              <div className="p-2 sm:p-3 bg-[#1a1a1a] rounded-lg text-center">
+                <Text type="secondary" style={{ display: 'block', marginBottom: '4px', fontSize: '10px' }}>Solicitante</Text>
+                <Text style={{ display: 'block', fontSize: '10px' }}>{selectedTicket.requester}</Text>
               </div>
             </Col>
             <Col xs={12} sm={6}>
-              <div className="p-3 bg-[#1a1a1a] rounded-lg text-center">
-                <Text type="secondary" className="text-xs block mb-1">Abertura</Text>
-                <Text className="text-xs">{selectedTicket.createdAt}</Text>
+              <div className="p-2 sm:p-3 bg-[#1a1a1a] rounded-lg text-center">
+                <Text type="secondary" style={{ display: 'block', marginBottom: '4px', fontSize: '10px' }}>Abertura</Text>
+                <Text style={{ display: 'block', fontSize: '10px' }}>{selectedTicket.createdAt}</Text>
               </div>
             </Col>
           </Row>
 
           {/* Histórico */}
           <div>
-            <Divider orientation="left" className="!my-3">
-              <div className="flex items-center gap-2">
-                <Clock size={14} className="text-gray-400" />
-                <Text className="text-gray-400 text-sm">Histórico</Text>
+            <Divider orientation="left" className="!my-2 sm:!my-3">
+              <div className="flex items-center gap-1 sm:gap-2">
+                <Clock size={12} className="text-gray-400" />
+                <Text className="text-gray-400 text-xs sm:text-sm">Histórico</Text>
               </div>
             </Divider>
 
-            <div className="max-h-[200px] overflow-y-auto px-1">
+            <div className="max-h-[120px] sm:max-h-[200px] overflow-y-auto px-1">
               <Timeline
                 items={(selectedTicket.history || []).map((event) => ({
                   color: event.color || 'blue',
                   children: (
                     <div className="pb-1">
-                      <Text strong className="text-gray-300 text-sm block">{event.text}</Text>
-                      <Text className="text-xs text-gray-500">{event.date}</Text>
+                      <Text strong style={{ display: 'block', marginBottom: '4px', fontSize: '14px' }} className="text-gray-300">{event.text}</Text>
+                      <Text style={{ display: 'block', fontSize: '12px' }} className="text-gray-500">{event.date}</Text>
                     </div>
                   ),
                 }))}
