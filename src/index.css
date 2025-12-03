@@ -157,6 +157,105 @@ body {
   .text-mobile-sm {
     font-size: 0.75rem !important;
   }
+
+  /* Tabela responsiva */
+  .ant-table {
+    font-size: 12px !important;
+  }
+
+  .ant-table-thead > tr > th {
+    padding: 8px 4px !important;
+    font-size: 11px !important;
+  }
+
+  .ant-table-tbody > tr > td {
+    padding: 10px 4px !important;
+  }
+
+  /* Ocultar coluna ID em mobile */
+  .ant-table-thead > tr > th:first-child,
+  .ant-table-tbody > tr > td:first-child {
+    display: none !important;
+  }
+
+  /* Coluna Chamado ocupa mais espaço */
+  .ant-table-thead > tr > th:nth-child(2),
+  .ant-table-tbody > tr > td:nth-child(2) {
+    width: 55% !important;
+    max-width: none !important;
+  }
+
+  /* Coluna Status mais compacta */
+  .ant-table-thead > tr > th:nth-child(3),
+  .ant-table-tbody > tr > td:nth-child(3) {
+    width: 25% !important;
+    white-space: nowrap !important;
+  }
+
+  /* Mostrar tag do sistema apenas em mobile */
+  .system-tag-mobile {
+    display: inline-flex !important;
+  }
+
+  /* Cards responsivos */
+  .stat-card {
+    margin-bottom: 0 !important;
+  }
+
+  /* Header responsivo */
+  .ant-layout-header {
+    padding: 0 12px !important;
+  }
+
+  /* Content padding menor em mobile */
+  .ant-layout-content {
+    padding: 16px 12px !important;
+  }
+
+  /* Modal responsivo */
+  .ant-modal {
+    max-width: calc(100vw - 32px) !important;
+    margin: 16px auto !important;
+  }
+
+  .ant-modal-body {
+    padding: 16px !important;
+    max-height: 60vh !important;
+    overflow-y: auto !important;
+  }
+
+  /* Segmented menor */
+  .ant-segmented-item-label {
+    padding: 0 8px !important;
+    min-height: 28px !important;
+  }
+
+  /* Tags menores */
+  .ant-tag {
+    font-size: 10px !important;
+    padding: 0 6px !important;
+    line-height: 18px !important;
+  }
+
+  /* Badge texto menor */
+  .ant-badge-status-text {
+    font-size: 11px !important;
+  }
+}
+
+/* Tablet */
+@media (max-width: 768px) and (min-width: 641px) {
+  .ant-layout-content {
+    padding: 20px 16px !important;
+  }
+
+  .ant-table-thead > tr > th {
+    padding: 10px 8px !important;
+  }
+
+  .ant-table-tbody > tr > td {
+    padding: 12px 8px !important;
+  }
 }
 
 /* Smooth transitions */
@@ -194,4 +293,15 @@ body {
 
 .ant-segmented-item {
   border-radius: 8px !important;
+}
+
+/* Tag do sistema - oculta em telas maiores (quando coluna Sistema está visível) */
+.system-tag-mobile {
+  display: inline-flex !important;
+}
+
+@media (min-width: 768px) {
+  .system-tag-mobile {
+    display: none !important;
+  }
 }

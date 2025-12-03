@@ -80,10 +80,10 @@ const TicketList = ({
     {
       title: 'ID',
       dataIndex: 'id',
-      width: 110,
-      fixed: 'left',
+      width: 90,
+      responsive: ['sm'],
       render: (id) => (
-        <Text code className="text-xs sm:text-sm">{id}</Text>
+        <Text code style={{ fontSize: 'clamp(10px, 2vw, 12px)' }}>{id}</Text>
       ),
     },
     {
@@ -91,12 +91,12 @@ const TicketList = ({
       dataIndex: 'title',
       ellipsis: false,
       render: (title, record) => (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', minWidth: '180px' }}>
-          <span style={{ fontWeight: 600, fontSize: '14px', lineHeight: 1.4 }}>{title}</span>
-          <Tag color="blue" style={{ width: 'fit-content', margin: 0, fontSize: '11px' }}>{record.system}</Tag>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+          <span style={{ fontWeight: 600, fontSize: 'clamp(12px, 2.5vw, 14px)', lineHeight: 1.4, wordBreak: 'break-word' }}>{title}</span>
+          <Tag color="blue" className="system-tag-mobile" style={{ width: 'fit-content', margin: 0, fontSize: 'clamp(9px, 2vw, 11px)' }}>{record.system}</Tag>
           {record.description && (
-            <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.45)', lineHeight: 1.3 }}>
-              {record.description.length > 60 ? record.description.substring(0, 60) + '...' : record.description}
+            <span className="hidden sm:block" style={{ fontSize: '12px', color: 'rgba(255,255,255,0.45)', lineHeight: 1.3 }}>
+              {record.description.length > 50 ? record.description.substring(0, 50) + '...' : record.description}
             </span>
           )}
         </div>
@@ -128,11 +128,11 @@ const TicketList = ({
     {
       title: 'Status',
       dataIndex: 'status',
-      width: 130,
+      width: 95,
       render: (status) => (
         <Badge 
           status={getStatusColor(status)} 
-          text={<Text strong className="text-xs sm:text-sm">{getStatusLabel(status)}</Text>} 
+          text={<Text strong style={{ fontSize: 'clamp(10px, 2vw, 12px)', whiteSpace: 'nowrap' }}>{getStatusLabel(status)}</Text>} 
         />
       ),
     },
@@ -152,25 +152,25 @@ const TicketList = ({
     {
       title: 'Prioridade',
       dataIndex: 'priority',
-      width: 100,
+      width: 85,
       render: (priority) => (
-        <Tag color={getPriorityColor(priority)} className="font-semibold">
+        <Tag color={getPriorityColor(priority)} style={{ fontWeight: 600, fontSize: 'clamp(9px, 2vw, 11px)', margin: 0 }}>
           {getPriorityLabel(priority)}
         </Tag>
       ),
     },
     {
-      title: 'Ações',
+      title: '',
       key: 'action',
-      width: 70,
-      fixed: 'right',
+      width: 50,
       align: 'center',
       render: (_, record) => (
         <Tooltip title="Ver Detalhes">
            <Button 
               type="text"
               shape="circle"
-              icon={<Eye size={16} className="text-blue-400" />}
+              size="small"
+              icon={<Eye size={14} className="text-blue-400" />}
               onClick={() => onViewDetails(record)}
               className="hover:bg-blue-500/10"
            />
@@ -184,9 +184,9 @@ const TicketList = ({
     {
       title: 'Prioridade',
       dataIndex: 'priority',
-      width: 100,
+      width: 85,
       render: (priority) => (
-        <Tag color={getPriorityColor(priority)} className="font-semibold">
+        <Tag color={getPriorityColor(priority)} style={{ fontWeight: 600, fontSize: 'clamp(9px, 2vw, 11px)', margin: 0 }}>
           {getPriorityLabel(priority)}
         </Tag>
       ),
@@ -194,33 +194,32 @@ const TicketList = ({
     {
       title: 'Atribuído',
       dataIndex: 'assignedTo',
-      width: 130,
-      responsive: ['md'],
+      width: 110,
+      responsive: ['sm'],
       render: (assignedTo) => assignedTo ? (
-        <div className="flex items-center gap-2">
-          <div className="w-6 h-6 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-xs text-white font-medium">
+        <div className="flex items-center gap-1.5">
+          <div className="w-5 h-5 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-[10px] text-white font-medium">
             {assignedTo.charAt(0)}
           </div>
-          <Text className="text-xs">{assignedTo}</Text>
+          <Text style={{ fontSize: '11px' }}>{assignedTo.split(' ')[0]}</Text>
         </div>
       ) : (
-        <Text type="secondary" className="text-xs italic">Não atribuído</Text>
+        <Text type="secondary" style={{ fontSize: '10px', fontStyle: 'italic' }}>--</Text>
       ),
     },
     {
-      title: 'Ações',
+      title: '',
       key: 'action',
-      width: 100,
-      fixed: 'right',
+      width: 70,
       align: 'center',
       render: (_, record) => (
-        <Space size="small">
+        <Space size={2}>
           <Tooltip title="Ver Detalhes">
              <Button 
                 type="text"
                 shape="circle"
                 size="small"
-                icon={<Eye size={16} className="text-blue-400" />}
+                icon={<Eye size={14} className="text-blue-400" />}
                 onClick={() => onViewDetails(record)}
                 className="hover:bg-blue-500/10"
              />
@@ -231,7 +230,7 @@ const TicketList = ({
                   type="text"
                   shape="circle"
                   size="small"
-                  icon={<Share2 size={16} className="text-purple-400" />}
+                  icon={<Share2 size={14} className="text-purple-400" />}
                   onClick={() => onAssignTicket(record)}
                   className="hover:bg-purple-500/10"
                />
