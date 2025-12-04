@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   Card,
   Row,
@@ -23,7 +23,9 @@ import {
   Clock,
   CheckCircle2,
   TrendingUp,
-  FileText
+  FileText,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 
 const { Text, Title } = Typography;
@@ -35,11 +37,58 @@ const TicketList = ({
   onAssignTicket
 }) => {
   const [searchText, setSearchText] = useState('');
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+  const tableContainerRef = useRef(null);
 
   const filteredData = data.filter(item => 
     item.id.toLowerCase().includes(searchText.toLowerCase()) ||
     item.title.toLowerCase().includes(searchText.toLowerCase())
   );
+
+  // Check scroll position and update navigation buttons visibility
+  const checkScrollPosition = () => {
+    const container = tableContainerRef.current?.querySelector('.ant-table-content');
+    if (container) {
+      const { scrollLeft, scrollWidth, clientWidth } = container;
+      setCanScrollLeft(scrollLeft > 0);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 5);
+    }
+  };
+
+  // Scroll the table horizontally
+  const scrollTable = (direction) => {
+    const container = tableContainerRef.current?.querySelector('.ant-table-content');
+    if (container) {
+      const scrollAmount = 200;
+      container.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  // Setup scroll listener
+  useEffect(() => {
+    const container = tableContainerRef.current?.querySelector('.ant-table-content');
+    if (container) {
+      // Initial check after a small delay to ensure table is fully rendered
+      const initialCheck = setTimeout(() => {
+        const { scrollLeft, scrollWidth, clientWidth } = container;
+        setCanScrollLeft(scrollLeft > 0);
+        setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 5);
+      }, 100);
+      
+      container.addEventListener('scroll', checkScrollPosition);
+      window.addEventListener('resize', checkScrollPosition);
+      
+      return () => {
+        clearTimeout(initialCheck);
+        container.removeEventListener('scroll', checkScrollPosition);
+        window.removeEventListener('resize', checkScrollPosition);
+      };
+    }
+  }, [filteredData]);
   const getPriorityColor = (priority) => {
     switch (priority) {
       case 'high': return 'red';
@@ -401,21 +450,54 @@ const TicketList = ({
             />
           </div>
         ) : (
-          <Table
-            columns={currentView === 'support' ? supportColumns : userColumns}
-            dataSource={filteredData}
-            pagination={{ 
-              pageSize: 6,
-              showSizeChanger: false,
-              showTotal: (total) => <Text type="secondary" className="text-xs">{total} itens</Text>,
-              className: 'px-4 pb-2 mt-3'
-            }}
-            scroll={{ x: 700 }}
-            rowClassName={(record) => 
-              `transition-smooth ${record.status === 'closed' ? 'opacity-50' : ''} ${record.priority === 'high' && record.status === 'open' ? 'bg-red-500/5' : ''}`
-            }
-            size="middle"
-          />
+          <div className="relative" ref={tableContainerRef}>
+            {/* Mobile scroll navigation buttons */}
+            {canScrollLeft && (
+              <button
+                onClick={() => scrollTable('left')}
+                className="absolute left-1 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-blue-600 shadow-lg flex items-center justify-center sm:hidden transition-all hover:bg-blue-500 active:scale-95"
+                style={{ boxShadow: '0 2px 8px rgba(0, 0, 0, 0.4)' }}
+                aria-label="Rolar para esquerda"
+              >
+                <ChevronLeft size={18} className="text-white" />
+              </button>
+            )}
+            {canScrollRight && (
+              <button
+                onClick={() => scrollTable('right')}
+                className="absolute right-1 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-blue-600 shadow-lg flex items-center justify-center sm:hidden transition-all hover:bg-blue-500 active:scale-95"
+                style={{ boxShadow: '0 2px 8px rgba(0, 0, 0, 0.4)' }}
+                aria-label="Rolar para direita"
+              >
+                <ChevronRight size={18} className="text-white" />
+              </button>
+            )}
+            
+            {/* Mobile scroll indicator */}
+            {(canScrollLeft || canScrollRight) && (
+              <div className="flex justify-center items-center gap-2 py-2 text-xs text-gray-500 sm:hidden">
+                <ChevronLeft size={14} className={canScrollLeft ? 'text-blue-400' : 'opacity-30'} />
+                <span>Deslize para ver mais</span>
+                <ChevronRight size={14} className={canScrollRight ? 'text-blue-400' : 'opacity-30'} />
+              </div>
+            )}
+            
+            <Table
+              columns={currentView === 'support' ? supportColumns : userColumns}
+              dataSource={filteredData}
+              pagination={{ 
+                pageSize: 6,
+                showSizeChanger: false,
+                showTotal: (total) => <Text type="secondary" className="text-xs">{total} itens</Text>,
+                className: 'px-4 pb-2 mt-3'
+              }}
+              scroll={{ x: 700 }}
+              rowClassName={(record) => 
+                `transition-smooth ${record.status === 'closed' ? 'opacity-50' : ''} ${record.priority === 'high' && record.status === 'open' ? 'bg-red-500/5' : ''}`
+              }
+              size="middle"
+            />
+          </div>
         )}
       </Card>
     </div>
