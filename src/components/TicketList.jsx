@@ -370,7 +370,7 @@ const TicketList = ({
         title={
           <div className="flex items-center gap-2">
             <FileText size={18} className="text-blue-400" />
-            <span className="text-sm sm:hidden">
+            <span className="md:text-sm hidden">
               {currentView === 'support' ? "Painel de Atendimentos" : "Meus Chamados Recentes"}
             </span>
           </div>
