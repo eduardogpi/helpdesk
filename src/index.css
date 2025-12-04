@@ -1,7 +1,14 @@
 @import "tailwindcss";
 
-@config {
-  content: ["./src/**/*.{js,jsx,ts,tsx}"];
+/* Configuração do Tailwind v4 */
+@source "../index.html";
+@source "./**/*.{js,jsx,ts,tsx}";
+
+/* Desabilitar preflight para não conflitar com Ant Design */
+@layer base {
+  *, ::before, ::after {
+    box-sizing: border-box;
+  }
 }
 
 :root {

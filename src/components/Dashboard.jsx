@@ -43,7 +43,7 @@ const Dashboard = ({
   return (
     <div className="space-y-4 sm:space-y-6">
       {/* Cabeçalho do Filtro - Responsivo */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 bg-[#141414] p-3 sm:p-4 rounded-xl border border-gray-800/50">
+      <div className="flex sm:flex-row flex-col justify-between items-start sm:items-center gap-3 bg-[#141414] p-3 sm:p-4 rounded-xl border border-gray-800/50">
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center">
             <Filter size={16} className="text-blue-400" />
@@ -63,7 +63,7 @@ const Dashboard = ({
       </div>
 
       {/* KPIs Principais - Grid Responsivo */}
-      <Row gutter={[12, 12]}>
+      <Row gutter={[12, 12]} style={{marginBottom: '12px'}}>
         <Col xs={12} sm={12} lg={6}>
           <Card 
             bordered={false} 
@@ -148,12 +148,12 @@ const Dashboard = ({
               >
                 <div className="space-y-5">
                   <div>
-                    <div className="flex justify-between text-gray-400 mb-2 text-sm">
+                    <div className="flex justify-between items-center text-gray-400 mb-2 text-sm">
                       <span className="flex items-center gap-2">
                         <span className="w-2 h-2 rounded-full bg-red-500"></span>
-                        Abertos (Fila)
+                        <span>Abertos (Fila)</span>
                       </span>
-                      <span className="font-semibold text-white">{totalOpen}</span>
+                      <span className="font-semibold text-white" style={{ marginLeft: '16px' }}>{totalOpen}</span>
                     </div>
                     <Progress 
                       percent={Math.round((totalOpen/totalTickets)*100)} 
@@ -164,12 +164,12 @@ const Dashboard = ({
                     />
                   </div>
                   <div>
-                    <div className="flex justify-between text-gray-400 mb-2 text-sm">
+                    <div className="flex justify-between items-center text-gray-400 mb-2 text-sm">
                       <span className="flex items-center gap-2">
                         <span className="w-2 h-2 rounded-full bg-yellow-500"></span>
-                        Em Andamento
+                        <span>Em Andamento</span>
                       </span>
-                      <span className="font-semibold text-white">{totalInProgress}</span>
+                      <span className="font-semibold text-white" style={{ marginLeft: '16px' }}>{totalInProgress}</span>
                     </div>
                     <Progress 
                       percent={Math.round((totalInProgress/totalTickets)*100)} 
@@ -180,12 +180,12 @@ const Dashboard = ({
                     />
                   </div>
                   <div>
-                    <div className="flex justify-between text-gray-400 mb-2 text-sm">
+                    <div className="flex justify-between items-center text-gray-400 mb-2 text-sm">
                       <span className="flex items-center gap-2">
                         <span className="w-2 h-2 rounded-full bg-green-500"></span>
-                        Concluídos
+                        <span>Concluídos</span>
                       </span>
-                      <span className="font-semibold text-white">{totalClosed}</span>
+                      <span className="font-semibold text-white" style={{ marginLeft: '16px' }}>{totalClosed}</span>
                     </div>
                     <Progress 
                       percent={Math.round((totalClosed/totalTickets)*100)} 
@@ -223,8 +223,8 @@ const Dashboard = ({
                             <span className="text-blue-400 font-bold text-sm">{item.count}</span>
                           </div>
                           <div>
-                            <Text className="text-gray-200 text-sm block">{item.name}</Text>
-                            <Text className="text-xs text-gray-500">{item.open} pendentes</Text>
+                            <Text style={{ display: 'block', marginBottom: '2px' }} className="text-gray-200 text-sm">{item.name}</Text>
+                            <Text style={{ display: 'block' }} className="text-xs text-gray-500">{item.open} pendentes</Text>
                           </div>
                         </div>
                         <Progress 

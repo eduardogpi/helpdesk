@@ -345,7 +345,7 @@ const App = () => {
             </Space>
           </Header>
     
-          <Content className="px-6 py-4 bg-white sm:px-8 sm:py-6 lg:px-12 lg:py-8 max-w-7xl mx-auto w-full">
+          <Content className="px-6 py-4 bg-zinc-950 sm:px-8 sm:py-6 lg:px-12 lg:py-8 max-w-7xl mx-auto w-full">
             
             {/* Barra de Ferramentas do Suporte */}
             {currentView === 'support' && (
